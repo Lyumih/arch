@@ -7,7 +7,7 @@ $arch_app $mol_page
 				content / <= Initial_length $mol_paragraph title <= initial_length \0
 			<= Initial_labeler $mol_labeler
 				title \Исходная строка
-				content / <= Initial $mol_string value? <=> initial? \0123456789абвгдеёжзиклмнопрстуфхч0123456789абвгдеёжзиклмнопрстуфхч
+				content / <= Initial $mol_string value? <=> initial? \0123456789абвгде
 		<= Result $mol_row sub /
 			<= Result_count_labeler $mol_labeler
 				title \Кол-во итераций

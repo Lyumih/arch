@@ -1,6 +1,7 @@
 namespace $.$$ {
 	export class $arch_app extends $.$arch_app {
 
+		@$mol_mem
 		initial_length(): string {
 			return this.initial().length.toString()
 		}
