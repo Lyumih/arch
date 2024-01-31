@@ -44,8 +44,9 @@ $arch_app $mol_page
 	foot /
 		<= Add_alogoritm $mol_row sub /
 			<= Algorithm_switch $mol_switch
-				value? <=> algorithm? \sub4
+				value? <=> algorithm? \lzw64
 				options <= algorithms *
+					lzw64 \lzw64
 					sub4 \Уменьшить на 4
 					sub8 \Уменьшить на 8
 					sub16 \Уменьшить на 16

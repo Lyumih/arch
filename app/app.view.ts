@@ -46,6 +46,8 @@ namespace $.$$ {
 		algorithm_calc() {
 			const value = this.fractals()[ this.fractals().length - 1 ]?.value ?? this.initial()
 			switch( this.algorithm() ) {
+				case 'lzw64':
+					return this.$.$arch_alg_lzw64_encode( value )
 				case 'sub4':
 					return value.substring( 0, value.length - 4 )
 				case 'sub8':
