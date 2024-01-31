@@ -8,6 +8,25 @@ $arch_app $mol_page
 			<= Initial_labeler $mol_labeler
 				title \Исходная строка
 				content / <= Initial $mol_string value? <=> initial? \0123456789абвгдеёжзиклмнопрстуфхч
+		<= Result $mol_row sub /
+			<= Result_count_labeler $mol_labeler
+				title \Кол-во итераций
+				content / <= Result_count $mol_paragraph title <= result_count \0
+			<= Result_all_length_labeler $mol_labeler
+				title \Всего символов
+				content / <= Result_all_length $mol_paragraph title <= result_all_length \0
+			<= Result_meta_length_labeler $mol_labeler
+				title \Длина метаданных
+				content / <= Result_meta_length $mol_paragraph title <= result_meta_length \0
+			<= Result_meta_labeler $mol_labeler
+				title \Метаданные
+				content / <= Result_meta $mol_paragraph title <= result_meta \
+			<= Result_labeler $mol_labeler
+				title \Длина результата
+				content / <= Result_length $mol_paragraph title <= result_length \0
+			<= Result_value_labeler $mol_labeler
+				title \Результат
+				content / <= Result_value $mol_paragraph title <= result_value \0
 		<= Fractal_list $mol_list rows <= fractal_list /
 			<= Fractal*0 $mol_view sub /
 				<= Fractal_remove* $mol_button_major
@@ -22,6 +41,7 @@ $arch_app $mol_page
 				<= Fractal_result_labeler* $mol_labeler
 					title \Результат
 					content / <= Fractal_result* $mol_paragraph title <= fractal_result* \
+	foot /
 		<= Add_alogoritm $mol_row sub /
 			<= Algorithm_switch $mol_switch
 				value? <=> algorithm? \sub4
@@ -29,16 +49,8 @@ $arch_app $mol_page
 					sub4 \Уменьшить на 4
 					sub8 \Уменьшить на 8
 					sub16 \Уменьшить на 16
+					add3 \Добавить 3
 			<= Add_fractal $mol_button_major
 				title \Добавить шаг
 				click? <=> fractal_add? null
-		<= Result $mol_row sub /
-			<= Result_count_labeler $mol_labeler
-				title \Кол-во итераций
-				content / <= Result_count $mol_paragraph title \0
-			<= Result_meta $mol_labeler
-				title \Длина метаданных
-				content / <= Result_meta_length \0
-			<= Result_labeler $mol_labeler
-				title \Длина результата
-				content / <= Result_length $mol_paragraph title \0
+		

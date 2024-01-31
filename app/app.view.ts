@@ -7,7 +7,7 @@ namespace $.$$ {
 
 		@$mol_mem
 		fractals( next?: any ): { id: string, name: string, value: string }[] {
-			return next ?? [ { id: '1', name: 'fractal', value: this.initial() } ]
+			return next ?? []
 		}
 
 		fractal_list(): readonly any[] {
@@ -26,6 +26,10 @@ namespace $.$$ {
 			return this.get_fractal( id )?.value ?? ''
 		}
 
+		fractal_last() {
+			return this.fractals()[ this.fractals().length - 1 ]
+		}
+
 		fractal_length( id: any ): string {
 			return this.get_fractal( id )?.value?.length.toString()
 		}
@@ -40,7 +44,7 @@ namespace $.$$ {
 		}
 
 		algorithm_calc() {
-			const value = this.fractals()[ this.fractals().length - 1 ]?.value ?? ''
+			const value = this.fractals()[ this.fractals().length - 1 ]?.value ?? this.initial()
 			switch( this.algorithm() ) {
 				case 'sub4':
 					return value.substring( 0, value.length - 4 )
@@ -48,10 +52,35 @@ namespace $.$$ {
 					return value.substring( 0, value.length - 8 )
 				case 'sub16':
 					return value.substring( 0, value.length - 16 )
+				case 'add3':
+					return value + '000'
 				default:
-					return 'error, no algorithm'
+					return value
 			}
 		}
 
+		result_count(): string {
+			return this.fractals().length.toLocaleString()
+		}
+
+		result_meta(): string {
+			return this.fractals().map( f => f.name ).join( ',' )
+		}
+
+		result_meta_length() {
+			return this.result_meta().length.toLocaleString()
+		}
+
+		result_value(): string {
+			return this.fractal_last()?.value ?? ''
+		}
+
+		result_length(): string {
+			return this.result_value().length.toLocaleString()
+		}
+
+		result_all_length(): string {
+			return ( +this.result_length() + +this.result_meta_length() ).toLocaleString()
+		}
 	}
 }
