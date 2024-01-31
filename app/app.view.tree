@@ -1,0 +1,4 @@
+$arch_app $mol_page
+	title \Фрактальный Архиватор
+	body /
+		<= Initial $mol_string value? <=> initial? \
