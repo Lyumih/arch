@@ -139,7 +139,10 @@
     "$mol_button_minor",
     "$mol_maybe",
     "$mol_state_session",
-    "$mol_state"
+    "$mol_state",
+    "$arch_alg_lzw64_encode",
+    "$arch_alg_lzw64",
+    "$arch_alg"
   ],
   "dependencies": {
     "jsdom": "*"

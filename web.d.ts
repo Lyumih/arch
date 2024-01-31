@@ -1523,6 +1523,10 @@ declare namespace $ {
     }
 }
 
+declare namespace $ {
+    function $arch_alg_lzw64_encode(s: any): any;
+}
+
 declare namespace $.$$ {
     class $arch_app extends $.$arch_app {
         initial_length(): string;
@@ -1543,7 +1547,7 @@ declare namespace $.$$ {
         fractal_length(id: any): string;
         fractal_add(next?: any): void;
         fractal_remove(next?: any): void;
-        algorithm_calc(): string;
+        algorithm_calc(): any;
         result_count(): string;
         result_meta(): string;
         result_meta_length(): string;

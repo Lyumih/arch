@@ -5277,10 +5277,11 @@ var $;
         algorithm(next) {
             if (next !== undefined)
                 return next;
-            return "sub4";
+            return "lzw64";
         }
         algorithms() {
             return {
+                lzw64: "lzw64",
                 sub4: "Уменьшить на 4",
                 sub8: "Уменьшить на 8",
                 sub16: "Уменьшить на 16",
@@ -5422,6 +5423,44 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    function $arch_alg_lzw64_encode(s) {
+        if (!s)
+            return s;
+        var dict = new Map();
+        var data = (s + "").split("");
+        var out = [];
+        var currChar;
+        var phrase = data[0];
+        var code = 256;
+        for (var i = 1; i < data.length; i++) {
+            currChar = data[i];
+            if (dict.has(phrase + currChar)) {
+                phrase += currChar;
+            }
+            else {
+                out.push(phrase.length > 1 ? dict.get(phrase) : phrase.codePointAt(0));
+                dict.set(phrase + currChar, code);
+                code++;
+                if (code === 0xd800) {
+                    code = 0xe000;
+                }
+                phrase = currChar;
+            }
+        }
+        out.push(phrase.length > 1 ? dict.get(phrase) : phrase.codePointAt(0));
+        for (var i = 0; i < out.length; i++) {
+            out[i] = String.fromCodePoint(out[i]);
+        }
+        console.log("LZW MAP SIZE", dict.size, out.slice(-50), out.length, out.join("").length);
+        return out.join("");
+    }
+    $.$arch_alg_lzw64_encode = $arch_alg_lzw64_encode;
+})($ || ($ = {}));
+//arch/alg/lzw64/encode/encode.ts
+;
+"use strict";
+var $;
+(function ($) {
     var $$;
     (function ($$) {
         class $arch_app extends $.$arch_app {
@@ -5458,6 +5497,8 @@ var $;
             algorithm_calc() {
                 const value = this.fractals()[this.fractals().length - 1]?.value ?? this.initial();
                 switch (this.algorithm()) {
+                    case 'lzw64':
+                        return this.$.$arch_alg_lzw64_encode(value);
                     case 'sub4':
                         return value.substring(0, value.length - 4);
                     case 'sub8':
