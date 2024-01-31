@@ -4547,7 +4547,7 @@ var $;
         initial(next) {
             if (next !== undefined)
                 return next;
-            return "0123456789абвгдеёжзиклмнопрстуфхч";
+            return "0123456789абвгдеёжзиклмнопрстуфхч0123456789абвгдеёжзиклмнопрстуфхч";
         }
         Initial() {
             const obj = new this.$.$mol_string();
@@ -4737,13 +4737,30 @@ var $;
             ];
             return obj;
         }
+        fractal_decode(id) {
+            return "";
+        }
+        Fractal_decode(id) {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.fractal_decode(id);
+            return obj;
+        }
+        Fractal_decode_labeler(id) {
+            const obj = new this.$.$mol_labeler();
+            obj.title = () => "Декодирование";
+            obj.content = () => [
+                this.Fractal_decode(id)
+            ];
+            return obj;
+        }
         Fractal(id) {
             const obj = new this.$.$mol_view();
             obj.sub = () => [
                 this.Fractal_remove(id),
                 this.Fractal_name_labeler(id),
                 this.Fractal_length_labeler(id),
-                this.Fractal_result_labeler(id)
+                this.Fractal_result_labeler(id),
+                this.Fractal_decode_labeler(id)
             ];
             return obj;
         }
@@ -4880,6 +4897,12 @@ var $;
     ], $arch_app.prototype, "Fractal_result_labeler", null);
     __decorate([
         $mol_mem_key
+    ], $arch_app.prototype, "Fractal_decode", null);
+    __decorate([
+        $mol_mem_key
+    ], $arch_app.prototype, "Fractal_decode_labeler", null);
+    __decorate([
+        $mol_mem_key
     ], $arch_app.prototype, "Fractal", null);
     __decorate([
         $mol_mem
@@ -4902,6 +4925,37 @@ var $;
     $.$arch_app = $arch_app;
 })($ || ($ = {}));
 //arch/app/-view.tree/app.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    function $arch_alg_lzw64_decode(s) {
+        var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+        var b64d = {};
+        for (var i = 0; i < 64; i++) {
+            b64d[b64.charAt(i)] = i;
+        }
+        var d = new Map();
+        var num = 256;
+        var word = String.fromCharCode(b64d[s[0]] + (b64d[s[1]] << 6) + (b64d[s[2]] << 12));
+        var prev = word;
+        var o = [word];
+        for (var i = 3; i < s.length; i += 3) {
+            var key = b64d[s[i]] + (b64d[s[i + 1]] << 6) + (b64d[s[i + 2]] << 12);
+            word = key < 256 ? String.fromCharCode(key) : d.has(key) ? d.get(key) : word + word.charAt(0);
+            o.push(word);
+            d.set(num++, prev + word.charAt(0));
+            prev = word;
+            if (num == (1 << 18) - 1) {
+                d.clear();
+                num = 256;
+            }
+        }
+        return decodeURIComponent(escape(o.join("")));
+    }
+    $.$arch_alg_lzw64_decode = $arch_alg_lzw64_decode;
+})($ || ($ = {}));
+//arch/alg/lzw64/decode/decode.ts
 ;
 "use strict";
 var $;
@@ -4965,6 +5019,9 @@ var $;
             fractal_result(id) {
                 return this.get_fractal(id)?.value ?? '';
             }
+            fractal_decode(id) {
+                return this.get_fractal(id)?.decode ?? '';
+            }
             fractal_last() {
                 return this.fractals()[this.fractals().length - 1];
             }
@@ -4972,13 +5029,19 @@ var $;
                 return this.get_fractal(id)?.value?.length.toString();
             }
             fractal_add(next) {
-                this.fractals([...this.fractals(), { id: $mol_guid(), name: this.algorithm(), value: this.algorithm_calc() }]);
+                this.fractals([...this.fractals(),
+                    { id: $mol_guid(), name: this.algorithm(), value: this.algorithm_encode(), decode: this.algorithm_decode() }]);
             }
             fractal_remove(next) {
                 this.fractals(this.fractals().filter(fractal => fractal.id !== next));
             }
-            algorithm_calc() {
-                const value = this.fractals()[this.fractals().length - 1]?.value ?? this.initial();
+            algorithm_decode() {
+                const encode = this.algorithm_encode();
+                console.log('encode', encode);
+                return this.$.$arch_alg_lzw64_decode(encode);
+            }
+            algorithm_encode() {
+                const value = this.fractal_last()?.value ?? this.initial();
                 switch (this.algorithm()) {
                     case 'lzw64':
                         return this.$.$arch_alg_lzw64_encode(value);

@@ -1632,6 +1632,9 @@ declare namespace $ {
         fractal_result(id: any): string;
         Fractal_result(id: any): $$.$mol_paragraph;
         Fractal_result_labeler(id: any): $mol_labeler;
+        fractal_decode(id: any): string;
+        Fractal_decode(id: any): $$.$mol_paragraph;
+        Fractal_decode_labeler(id: any): $mol_labeler;
         Fractal(id: any): $mol_view;
         fractal_list(): readonly any[];
         Fractal_list(): $$.$mol_list;
@@ -1645,6 +1648,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $arch_alg_lzw64_decode(s: any): string;
+}
+
+declare namespace $ {
     function $arch_alg_lzw64_encode(s: any): any;
 }
 
@@ -1655,20 +1662,24 @@ declare namespace $.$$ {
             id: string;
             name: string;
             value: string;
+            decode: string;
         }[];
         fractal_list(): readonly any[];
         get_fractal(id: string): any;
         fractal_name(id: any): string;
         fractal_result(id: any): string;
+        fractal_decode(id: any): string;
         fractal_last(): {
             id: string;
             name: string;
             value: string;
+            decode: string;
         };
         fractal_length(id: any): string;
         fractal_add(next?: any): void;
         fractal_remove(next?: any): void;
-        algorithm_calc(): any;
+        algorithm_decode(): string;
+        algorithm_encode(): any;
         result_count(): string;
         result_meta(): string;
         result_meta_length(): string;
