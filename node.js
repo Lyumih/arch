@@ -5036,9 +5036,13 @@ var $;
         body() {
             return [
                 this.Initial_section(),
-                this.Fractal_list(),
-                this.Add_alogoritm(),
-                this.Result()
+                this.Result(),
+                this.Fractal_list()
+            ];
+        }
+        foot() {
+            return [
+                this.Add_alogoritm()
             ];
         }
         initial_length() {
@@ -5080,6 +5084,114 @@ var $;
             obj.sub = () => [
                 this.Initial_length_labeler(),
                 this.Initial_labeler()
+            ];
+            return obj;
+        }
+        result_count() {
+            return "0";
+        }
+        Result_count() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.result_count();
+            return obj;
+        }
+        Result_count_labeler() {
+            const obj = new this.$.$mol_labeler();
+            obj.title = () => "Кол-во итераций";
+            obj.content = () => [
+                this.Result_count()
+            ];
+            return obj;
+        }
+        result_all_length() {
+            return "0";
+        }
+        Result_all_length() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.result_all_length();
+            return obj;
+        }
+        Result_all_length_labeler() {
+            const obj = new this.$.$mol_labeler();
+            obj.title = () => "Всего символов";
+            obj.content = () => [
+                this.Result_all_length()
+            ];
+            return obj;
+        }
+        result_meta_length() {
+            return "0";
+        }
+        Result_meta_length() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.result_meta_length();
+            return obj;
+        }
+        Result_meta_length_labeler() {
+            const obj = new this.$.$mol_labeler();
+            obj.title = () => "Длина метаданных";
+            obj.content = () => [
+                this.Result_meta_length()
+            ];
+            return obj;
+        }
+        result_meta() {
+            return "";
+        }
+        Result_meta() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.result_meta();
+            return obj;
+        }
+        Result_meta_labeler() {
+            const obj = new this.$.$mol_labeler();
+            obj.title = () => "Метаданные";
+            obj.content = () => [
+                this.Result_meta()
+            ];
+            return obj;
+        }
+        result_length() {
+            return "0";
+        }
+        Result_length() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.result_length();
+            return obj;
+        }
+        Result_labeler() {
+            const obj = new this.$.$mol_labeler();
+            obj.title = () => "Длина результата";
+            obj.content = () => [
+                this.Result_length()
+            ];
+            return obj;
+        }
+        result_value() {
+            return "0";
+        }
+        Result_value() {
+            const obj = new this.$.$mol_paragraph();
+            obj.title = () => this.result_value();
+            return obj;
+        }
+        Result_value_labeler() {
+            const obj = new this.$.$mol_labeler();
+            obj.title = () => "Результат";
+            obj.content = () => [
+                this.Result_value()
+            ];
+            return obj;
+        }
+        Result() {
+            const obj = new this.$.$mol_row();
+            obj.sub = () => [
+                this.Result_count_labeler(),
+                this.Result_all_length_labeler(),
+                this.Result_meta_length_labeler(),
+                this.Result_meta_labeler(),
+                this.Result_labeler(),
+                this.Result_value_labeler()
             ];
             return obj;
         }
@@ -5171,7 +5283,8 @@ var $;
             return {
                 sub4: "Уменьшить на 4",
                 sub8: "Уменьшить на 8",
-                sub16: "Уменьшить на 16"
+                sub16: "Уменьшить на 16",
+                add3: "Добавить 3"
             };
         }
         Algorithm_switch() {
@@ -5199,52 +5312,6 @@ var $;
             ];
             return obj;
         }
-        Result_count() {
-            const obj = new this.$.$mol_paragraph();
-            obj.title = () => "0";
-            return obj;
-        }
-        Result_count_labeler() {
-            const obj = new this.$.$mol_labeler();
-            obj.title = () => "Кол-во итераций";
-            obj.content = () => [
-                this.Result_count()
-            ];
-            return obj;
-        }
-        Result_meta_length() {
-            return "0";
-        }
-        Result_meta() {
-            const obj = new this.$.$mol_labeler();
-            obj.title = () => "Длина метаданных";
-            obj.content = () => [
-                this.Result_meta_length()
-            ];
-            return obj;
-        }
-        Result_length() {
-            const obj = new this.$.$mol_paragraph();
-            obj.title = () => "0";
-            return obj;
-        }
-        Result_labeler() {
-            const obj = new this.$.$mol_labeler();
-            obj.title = () => "Длина результата";
-            obj.content = () => [
-                this.Result_length()
-            ];
-            return obj;
-        }
-        Result() {
-            const obj = new this.$.$mol_row();
-            obj.sub = () => [
-                this.Result_count_labeler(),
-                this.Result_meta(),
-                this.Result_labeler()
-            ];
-            return obj;
-        }
     }
     __decorate([
         $mol_mem
@@ -5264,6 +5331,45 @@ var $;
     __decorate([
         $mol_mem
     ], $arch_app.prototype, "Initial_section", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_count", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_count_labeler", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_all_length", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_all_length_labeler", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_meta_length", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_meta_length_labeler", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_meta", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_meta_labeler", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_length", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_labeler", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_value", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result_value_labeler", null);
+    __decorate([
+        $mol_mem
+    ], $arch_app.prototype, "Result", null);
     __decorate([
         $mol_mem_key
     ], $arch_app.prototype, "fractal_remove", null);
@@ -5309,24 +5415,6 @@ var $;
     __decorate([
         $mol_mem
     ], $arch_app.prototype, "Add_alogoritm", null);
-    __decorate([
-        $mol_mem
-    ], $arch_app.prototype, "Result_count", null);
-    __decorate([
-        $mol_mem
-    ], $arch_app.prototype, "Result_count_labeler", null);
-    __decorate([
-        $mol_mem
-    ], $arch_app.prototype, "Result_meta", null);
-    __decorate([
-        $mol_mem
-    ], $arch_app.prototype, "Result_length", null);
-    __decorate([
-        $mol_mem
-    ], $arch_app.prototype, "Result_labeler", null);
-    __decorate([
-        $mol_mem
-    ], $arch_app.prototype, "Result", null);
     $.$arch_app = $arch_app;
 })($ || ($ = {}));
 //arch/app/-view.tree/app.view.tree.ts
@@ -5341,7 +5429,7 @@ var $;
                 return this.initial().length.toString();
             }
             fractals(next) {
-                return next ?? [{ id: '1', name: 'fractal', value: this.initial() }];
+                return next ?? [];
             }
             fractal_list() {
                 return this.fractals().map(({ id }) => this.Fractal(id));
@@ -5355,6 +5443,9 @@ var $;
             fractal_result(id) {
                 return this.get_fractal(id)?.value ?? '';
             }
+            fractal_last() {
+                return this.fractals()[this.fractals().length - 1];
+            }
             fractal_length(id) {
                 return this.get_fractal(id)?.value?.length.toString();
             }
@@ -5365,7 +5456,7 @@ var $;
                 this.fractals(this.fractals().filter(fractal => fractal.id !== next));
             }
             algorithm_calc() {
-                const value = this.fractals()[this.fractals().length - 1]?.value ?? '';
+                const value = this.fractals()[this.fractals().length - 1]?.value ?? this.initial();
                 switch (this.algorithm()) {
                     case 'sub4':
                         return value.substring(0, value.length - 4);
@@ -5373,9 +5464,29 @@ var $;
                         return value.substring(0, value.length - 8);
                     case 'sub16':
                         return value.substring(0, value.length - 16);
+                    case 'add3':
+                        return value + '000';
                     default:
-                        return 'error, no algorithm';
+                        return value;
                 }
+            }
+            result_count() {
+                return this.fractals().length.toLocaleString();
+            }
+            result_meta() {
+                return this.fractals().map(f => f.name).join(',');
+            }
+            result_meta_length() {
+                return this.result_meta().length.toLocaleString();
+            }
+            result_value() {
+                return this.fractal_last()?.value ?? '';
+            }
+            result_length() {
+                return this.result_value().length.toLocaleString();
+            }
+            result_all_length() {
+                return (+this.result_length() + +this.result_meta_length()).toLocaleString();
             }
         }
         __decorate([

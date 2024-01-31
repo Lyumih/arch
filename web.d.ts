@@ -1473,6 +1473,7 @@ declare namespace $ {
     class $arch_app extends $mol_page {
         title(): string;
         body(): readonly any[];
+        foot(): readonly any[];
         initial_length(): string;
         Initial_length(): $$.$mol_paragraph;
         Initial_length_labeler(): $mol_labeler;
@@ -1480,6 +1481,25 @@ declare namespace $ {
         Initial(): $$.$mol_string;
         Initial_labeler(): $mol_labeler;
         Initial_section(): $mol_row;
+        result_count(): string;
+        Result_count(): $$.$mol_paragraph;
+        Result_count_labeler(): $mol_labeler;
+        result_all_length(): string;
+        Result_all_length(): $$.$mol_paragraph;
+        Result_all_length_labeler(): $mol_labeler;
+        result_meta_length(): string;
+        Result_meta_length(): $$.$mol_paragraph;
+        Result_meta_length_labeler(): $mol_labeler;
+        result_meta(): string;
+        Result_meta(): $$.$mol_paragraph;
+        Result_meta_labeler(): $mol_labeler;
+        result_length(): string;
+        Result_length(): $$.$mol_paragraph;
+        Result_labeler(): $mol_labeler;
+        result_value(): string;
+        Result_value(): $$.$mol_paragraph;
+        Result_value_labeler(): $mol_labeler;
+        Result(): $mol_row;
         fractal_remove(id: any, next?: any): any;
         Fractal_remove(id: any): $mol_button_major;
         fractal_name(id: any): string;
@@ -1500,13 +1520,6 @@ declare namespace $ {
         fractal_add(next?: any): any;
         Add_fractal(): $mol_button_major;
         Add_alogoritm(): $mol_row;
-        Result_count(): $$.$mol_paragraph;
-        Result_count_labeler(): $mol_labeler;
-        Result_meta_length(): string;
-        Result_meta(): $mol_labeler;
-        Result_length(): $$.$mol_paragraph;
-        Result_labeler(): $mol_labeler;
-        Result(): $mol_row;
     }
 }
 
@@ -1522,10 +1535,21 @@ declare namespace $.$$ {
         get_fractal(id: string): any;
         fractal_name(id: any): string;
         fractal_result(id: any): string;
+        fractal_last(): {
+            id: string;
+            name: string;
+            value: string;
+        };
         fractal_length(id: any): string;
         fractal_add(next?: any): void;
         fractal_remove(next?: any): void;
         algorithm_calc(): string;
+        result_count(): string;
+        result_meta(): string;
+        result_meta_length(): string;
+        result_value(): string;
+        result_length(): string;
+        result_all_length(): string;
     }
 }
 
