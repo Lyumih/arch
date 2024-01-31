@@ -4547,7 +4547,7 @@ var $;
         initial(next) {
             if (next !== undefined)
                 return next;
-            return "0123456789абвгдеёжзиклмнопрстуфхч0123456789абвгдеёжзиклмнопрстуфхч";
+            return "0123456789абвгде";
         }
         Initial() {
             const obj = new this.$.$mol_string();
@@ -4930,28 +4930,28 @@ var $;
 var $;
 (function ($) {
     function $arch_alg_lzw64_decode(s) {
-        var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
-        var b64d = {};
-        for (var i = 0; i < 64; i++) {
-            b64d[b64.charAt(i)] = i;
-        }
-        var d = new Map();
-        var num = 256;
-        var word = String.fromCharCode(b64d[s[0]] + (b64d[s[1]] << 6) + (b64d[s[2]] << 12));
-        var prev = word;
-        var o = [word];
-        for (var i = 3; i < s.length; i += 3) {
-            var key = b64d[s[i]] + (b64d[s[i + 1]] << 6) + (b64d[s[i + 2]] << 12);
-            word = key < 256 ? String.fromCharCode(key) : d.has(key) ? d.get(key) : word + word.charAt(0);
-            o.push(word);
-            d.set(num++, prev + word.charAt(0));
-            prev = word;
-            if (num == (1 << 18) - 1) {
-                d.clear();
-                num = 256;
+        var dict = {};
+        var data = (s + "").split("");
+        var currChar = data[0];
+        var oldPhrase = currChar;
+        var out = [currChar];
+        var code = 256;
+        var phrase;
+        for (var i = 1; i < data.length; i++) {
+            var currCode = data[i].charCodeAt(0);
+            if (currCode < 256) {
+                phrase = data[i];
             }
+            else {
+                phrase = dict[currCode] ? dict[currCode] : (oldPhrase + currChar);
+            }
+            out.push(phrase);
+            currChar = phrase.charAt(0);
+            dict[code] = oldPhrase + currChar;
+            code++;
+            oldPhrase = phrase;
         }
-        return decodeURIComponent(escape(o.join("")));
+        return out.join("");
     }
     $.$arch_alg_lzw64_decode = $arch_alg_lzw64_decode;
 })($ || ($ = {}));
@@ -4961,9 +4961,7 @@ var $;
 var $;
 (function ($) {
     function $arch_alg_lzw64_encode(s) {
-        if (!s)
-            return s;
-        var dict = new Map();
+        var dict = {};
         var data = (s + "").split("");
         var out = [];
         var currChar;
@@ -4971,24 +4969,20 @@ var $;
         var code = 256;
         for (var i = 1; i < data.length; i++) {
             currChar = data[i];
-            if (dict.has(phrase + currChar)) {
+            if (dict[phrase + currChar] != null) {
                 phrase += currChar;
             }
             else {
-                out.push(phrase.length > 1 ? dict.get(phrase) : phrase.codePointAt(0));
-                dict.set(phrase + currChar, code);
+                out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
+                dict[phrase + currChar] = code;
                 code++;
-                if (code === 0xd800) {
-                    code = 0xe000;
-                }
                 phrase = currChar;
             }
         }
-        out.push(phrase.length > 1 ? dict.get(phrase) : phrase.codePointAt(0));
+        out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
         for (var i = 0; i < out.length; i++) {
-            out[i] = String.fromCodePoint(out[i]);
+            out[i] = String.fromCharCode(out[i]);
         }
-        console.log("LZW MAP SIZE", dict.size, out.slice(-50), out.length, out.join("").length);
         return out.join("");
     }
     $.$arch_alg_lzw64_encode = $arch_alg_lzw64_encode;
@@ -5076,6 +5070,9 @@ var $;
                 return (+this.result_length() + +this.result_meta_length()).toLocaleString();
             }
         }
+        __decorate([
+            $mol_mem
+        ], $arch_app.prototype, "initial_length", null);
         __decorate([
             $mol_mem
         ], $arch_app.prototype, "fractals", null);

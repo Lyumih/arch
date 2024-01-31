@@ -1531,7 +1531,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $arch_alg_lzw64_encode(s: any): any;
+    function $arch_alg_lzw64_encode(s: any): string;
 }
 
 declare namespace $.$$ {
@@ -1558,7 +1558,7 @@ declare namespace $.$$ {
         fractal_add(next?: any): void;
         fractal_remove(next?: any): void;
         algorithm_decode(): string;
-        algorithm_encode(): any;
+        algorithm_encode(): string;
         result_count(): string;
         result_meta(): string;
         result_meta_length(): string;
