@@ -7,7 +7,7 @@ $arch_app $mol_page
 				content / <= Initial_length $mol_paragraph title <= initial_length \0
 			<= Initial_labeler $mol_labeler
 				title \Исходная строка
-				content / <= Initial $mol_string value? <=> initial? \0123456789абвгдеёжзиклмнопрстуфхч
+				content / <= Initial $mol_string value? <=> initial? \0123456789абвгдеёжзиклмнопрстуфхч0123456789абвгдеёжзиклмнопрстуфхч
 		<= Result $mol_row sub /
 			<= Result_count_labeler $mol_labeler
 				title \Кол-во итераций
@@ -41,6 +41,9 @@ $arch_app $mol_page
 				<= Fractal_result_labeler* $mol_labeler
 					title \Результат
 					content / <= Fractal_result* $mol_paragraph title <= fractal_result* \
+				<= Fractal_decode_labeler* $mol_labeler
+					title \Декодирование
+					content / <= Fractal_decode* $mol_paragraph title <= fractal_decode* \
 	foot /
 		<= Add_alogoritm $mol_row sub /
 			<= Algorithm_switch $mol_switch

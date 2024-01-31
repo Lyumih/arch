@@ -6,7 +6,7 @@ namespace $.$$ {
 		}
 
 		@$mol_mem
-		fractals( next?: any ): { id: string, name: string, value: string }[] {
+		fractals( next?: any ): { id: string, name: string, value: string, decode: string }[] {
 			return next ?? []
 		}
 
@@ -26,6 +26,10 @@ namespace $.$$ {
 			return this.get_fractal( id )?.value ?? ''
 		}
 
+		fractal_decode( id: any ): string {
+			return this.get_fractal( id )?.decode ?? ''
+		}
+
 		fractal_last() {
 			return this.fractals()[ this.fractals().length - 1 ]
 		}
@@ -36,15 +40,22 @@ namespace $.$$ {
 
 		fractal_add( next?: any ) {
 
-			this.fractals( [ ...this.fractals(), { id: $mol_guid(), name: this.algorithm(), value: this.algorithm_calc() } ] )
+			this.fractals( [ ...this.fractals(),
+			{ id: $mol_guid(), name: this.algorithm(), value: this.algorithm_encode(), decode: this.algorithm_decode() } ] )
 		}
 
 		fractal_remove( next?: any ) {
 			this.fractals( this.fractals().filter( fractal => fractal.id !== next ) )
 		}
 
-		algorithm_calc() {
-			const value = this.fractals()[ this.fractals().length - 1 ]?.value ?? this.initial()
+		algorithm_decode(): string {
+			const encode = this.algorithm_encode()
+			console.log( 'encode', encode )
+			return this.$.$arch_alg_lzw64_decode( encode )
+		}
+
+		algorithm_encode() {
+			const value = this.fractal_last()?.value ?? this.initial()
 			switch( this.algorithm() ) {
 				case 'lzw64':
 					return this.$.$arch_alg_lzw64_encode( value )
