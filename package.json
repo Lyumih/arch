@@ -174,7 +174,6 @@
     "$arch_alg_lzw64_encode"
   ],
   "dependencies": {
-    "internal": "*",
     "jsdom": "*"
   }
 }
