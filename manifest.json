@@ -1,0 +1,10 @@
+{
+	"name": "arch_app",
+	"short_name": "arch_app",
+	"description": "",
+	"id": "arch_app",
+	"start_url": ".",
+	"display": "standalone",
+	"background_color": "#000000",
+	"theme_color": "#000000"
+}
