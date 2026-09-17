@@ -141,6 +141,7 @@
     "$mol_support",
     "$mol_string",
     "$mol_hotkey",
+    "$mol_hotkey2",
     "$mol_keyboard_code",
     "$mol_keyboard",
     "$mol_action",
