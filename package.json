@@ -155,6 +155,7 @@
     "$mol_check_list",
     "$mol_check",
     "$mol_dom_event",
+    "$mol_dom_transfer",
     "$mol_state_session",
     "$mol_state",
     "$arch_alg_lzw64_decode",
